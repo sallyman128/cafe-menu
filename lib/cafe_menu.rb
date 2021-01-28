@@ -1,6 +1,3 @@
-require "cafe_menu/version"
+require_relative "./cafe_menu/version"
+require_relative "./cafe_menu/cli"
 
-module CafeMenu
-  class Error < StandardError; end
-  # Your code goes here...
-end
