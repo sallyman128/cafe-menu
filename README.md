@@ -1,8 +1,6 @@
-# CafeMenu
+# TodaysWeather
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/todays_weather`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+The TodaysWeather gem provides users with live weather information for their desired location in the U.S.
 
 ## Installation
 
@@ -18,11 +16,11 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install cafe_menu
+    $ gem install todays_weather
 
 ## Usage
 
-TODO: Write usage instructions here
+The gem will prompt the user to select their preferred unit of measurement for temperature and a 5-digit zipcode in the U.S. Using both pieces of information, the gem will pull the desired data from the OpenWeather API and output it to the user.
 
 ## Development
 
@@ -32,7 +30,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/cafe_menu. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/cafe_menu/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/sallyman128/todays-weather. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/sallyman128/todays-weather/blob/master/CODE_OF_CONDUCT.md).
 
 
 ## License
@@ -41,5 +39,5 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the CafeMenu project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/cafe_menu/blob/master/CODE_OF_CONDUCT.md).
-# cafe-menu
+Everyone interacting in the TodaysWeather project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/sallyman128/todays-weather/blob/master/CODE_OF_CONDUCT.md).
+# todays-weather

@@ -1,6 +1,6 @@
 # API help page https://openweathermap.org/current#data
 
-class TodaysWeather::WeatherAPI
+class TodaysWeather::OpenWeatherAPI
 
   # extracts a hash of weather details from API
   def self.weather_data_getter(zip, units)

@@ -3,7 +3,7 @@ require_relative "./todays_weather/cli"
 require_relative "./todays_weather/weather_api"
 require_relative "./todays_weather/weather.rb"
 
-require 'pry'
+# require 'pry'
 require 'nokogiri'
 require 'open-uri'
 

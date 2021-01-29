@@ -1,5 +1,7 @@
 class TodaysWeather::Weather
-  attr_accessor :city, :temp, :temp_high, :temp_low
+  attr_accessor :city, :temp, :temp_high, :temp_low, :date
+
+  @@all = []
 
   def self.new_from_hash(api_hash)
     weather = self.new
@@ -7,6 +9,8 @@ class TodaysWeather::Weather
     weather.temp = api_hash["main"]["temp"]
     weather.temp_high = api_hash["main"]["temp_max"]
     weather.temp_low = api_hash["main"]["temp_min"]
+    weather.date = Time.now.strftime("")
+    @@all << weather
     weather
   end
 end

@@ -14,7 +14,7 @@ class TodaysWeather::CLI
 
     until (input.to_i >= 1 && input.to_i <= 3) || input == 'exit' do
       puts "\n"
-      puts "Please select your preferred unit of measurement from the list, or type 'exit'."
+      puts "Please select your preferred unit of temperature measurement from the list, or type 'exit'."
       puts "  1. Standard (Kelvin)"
       puts "  2. Metric (Celsius)"
       puts "  3. Imperial (Fahrenheit)"
@@ -28,7 +28,7 @@ class TodaysWeather::CLI
     when "1"
       puts "You've selected to show the weather in Standard units."
       @units = "standard"
-      @degrees = " degrees Kelvin"
+      @degrees = "° Kelvin"
     when "2"
       puts "You've selected to show the weather in Metric units."
       @units = "metric"
@@ -42,7 +42,7 @@ class TodaysWeather::CLI
     end
   end
 
-  # takes @zipcode and @units and sends to the #display_weather
+  # takes @zipcode and @units and sends to #display_weather
   def show_weather
     until @zipcode == 'exit' do
       self.get_zipcode
@@ -67,12 +67,12 @@ class TodaysWeather::CLI
     end
   end
 
-  # calls upon WeatherAPI to pull weather data for the provided zipcode and units. returns a hash.
+  # calls upon OpenWeatherAPI to pull weather data for the provided zipcode and units. returns a hash.
   def get_weather_hash
-    @weather_hash = TodaysWeather::WeatherAPI.weather_data_getter(@zipcode, @units)
+    @weather_hash = TodaysWeather::OpenWeatherAPI.weather_data_getter(@zipcode, @units)
   end
 
-  # gets weather hash from the API method and determine if zipcode exists or not. Then outputs desired weather info.
+  # gets weather hash from the API method and determines if zipcode exists or not. Then outputs desired weather info.
   def display_weather
     weather_hash = self.get_weather_hash
 

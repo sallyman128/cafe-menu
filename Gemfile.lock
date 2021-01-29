@@ -38,7 +38,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler
-  cafe_menu!
+  todays_weather!
   pry
   rake (~> 12.0)
   rspec
