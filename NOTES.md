@@ -1,8 +1,6 @@
 Description:
   A CLI that provides the weather in your local area.
 
-Note: Users typically don't want to change their units of measurement. Once set, user should not be asked for it again. However, they should always be provided the option to change it.
-
 Program Experience:
   User - inputs the command: todays-weather
 
@@ -11,19 +9,10 @@ Program Experience:
     1. Standard
     2. Metric
     3. Imperial
-  
-  CLI - prompts user
-  
-
-  CLI - If user ever ente
 
   CLI prompts user for zipcode and to select their preferred measurement
     "Please enter a 5-digit zipcode."
     .gets()
-    "Please select your preferred unit of measurement from list."
-      1. Standard
-      2. Metric
-      3. Imperial
 
   Program uses the user's selected info to pull info from the weather API.
   Returns the following information to the user
@@ -35,4 +24,5 @@ Program Experience:
 
 
 
-Problems
+ToDo
+  Hide API key from being pushed to github!
