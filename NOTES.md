@@ -1,55 +1,38 @@
 Description:
-  A CLI that provides the menu of a local Frederick cafe: Frederick Coffee Co. & Cafe
-  http://fredcoffeeco.com/index.php/menu/
+  A CLI that provides the weather in your local area.
+
+Note: Users typically don't want to change their units of measurement. Once set, user should not be asked for it again. However, they should always be provided the option to change it.
 
 Program Experience:
-  User inputs frederick-coffee-cafe-menu
+  User - inputs the command: todays-weather
 
-  Program scrapes the cafe's menu website.
-
-  CLI shows a list of menu categories from their website:
-    1. Breakfast
-    2. Sandwiches
-    3. Paninis
-    4. Lunch wraps
-    5. Salads
-    6. Combos and Soups
-    7. For the kids
-    8. Classic favorites
-    9. Espresso drinks
-    10. Specialty lattes
-
-  CLI prompts user for action
-    Which menu category would you like to explore?
-    If you'd like to exit, type "exit"
+  CLI - prompts user for their preferred measurement
+  "Please select your preferred unit of measurement from the below list. Or type 'exit'"
+    1. Standard
+    2. Metric
+    3. Imperial
   
-  User inputs a menu number (i.e. 2 - for Sandwiches)
-
-  CLI shows a list of menu items from that user's desired menu category.
-    1. East street chicken salad
-    2. Key city reuben
-    3. Black bean burger
-    4. Church street sandwich
-
-  CLI prompts user for action
-    Which menu item would like to receive the price and description of?
-    If you'd like to go back one level, type "back"
-    If you'd like to exit, type "exit"
-
-  User inputs a menu item number (i.e. 1 - for East street chicken salad)
+  CLI - prompts user
   
-  CLI shows the menu item price and description
-    Item: East Street Chicken Salad
-    Price: $6.99
-    Description: Our famous house-made chicken salad topped with swiss cheese, artisan leaf lettuce, & tomato served on a croissant
 
-  CLI prompts user if they'd like to go "back" a level or "exit"
-    If you'd like to go back one level, type "back"
-    If you'd like to exit, type "exit"
+  CLI - If user ever ente
 
-  If User ever types "exit", output "Thanks! Seeya again soon!"
+  CLI prompts user for zipcode and to select their preferred measurement
+    "Please enter a 5-digit zipcode."
+    .gets()
+    "Please select your preferred unit of measurement from list."
+      1. Standard
+      2. Metric
+      3. Imperial
 
-Ways to build out further
-  1. Provide user with info on events at the cafe.
-        Viewing the website's event calendar through the "list" view will permit scraping. The "month" view has too much javascript to permit scraping.
-  2. 
+  Program uses the user's selected info to pull info from the weather API.
+  Returns the following information to the user
+
+  CLI prompts user to check the weather again with a zipcode.
+    "Please enter a 5-digit zipcode or type 'exit'."
+
+  Program continues on a loop until user exits.
+
+
+
+Problems

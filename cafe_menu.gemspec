@@ -1,8 +1,8 @@
-require_relative 'lib/cafe_menu/version'
+require_relative 'lib/todays_weather/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "cafe_menu"
-  spec.version       = CafeMenu::VERSION
+  spec.name          = "todays_weather"
+  spec.version       = TodaysWeather::VERSION
   spec.authors       = ["Salmaan"]
   spec.email         = ["salmaan.arif.ali@gmail.com"]
 

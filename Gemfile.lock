@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cafe_menu (0.1.0)
+    todays_weather (0.1.0)
       nokogiri
 
 GEM
