@@ -7,5 +7,4 @@
 /spec/reports/
 /tmp/
 
-bin/assets/.api-key
-# .env
+.env
