@@ -8,3 +8,5 @@
 /tmp/
 
 /lib/assets/.api-key
+
+.env
