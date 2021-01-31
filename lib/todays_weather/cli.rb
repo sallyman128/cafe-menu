@@ -1,89 +1,96 @@
 class TodaysWeather::CLI
 
-  # the one method that provides overall user-experience flow
+  # provides overall user-experience flow
   def call
-    @zipcode = nil
+    puts "\nGreetings!"
     self.get_units
-    self.show_weather
+
+    until @exit == true do
+      self.get_zipcode
+
+      weather_hash = TodaysWeather::OpenWeatherAPI.retrieve_data(@zipcode, @units[:api_input])
+      
+      if TodaysWeather::Weather.valid_zipcode?(weather_hash)
+        self.pull_weather(weather_hash) unless @exit == true
+        self.more_details unless @exit == true
+      else
+        puts "\nSorry. The zipcode you searched cannot be found."
+      end
+    end
+
     self.goodbye
   end
 
-  # prompts user to select their preferred units or type 'exit'
+  # requests user to input their preferred unit of weather measurement
   def get_units
-    input = nil
+    input = ""
+    TodaysWeather::Weather.display_units
+    input = gets.chomp.downcase
 
-    until (input.to_i >= 1 && input.to_i <= 3) || input == 'exit' do
-      puts "\n"
-      puts "Please select your preferred unit of temperature measurement from the list, or type 'exit'."
-      puts "  1. Standard (Kelvin)"
-      puts "  2. Metric (Celsius)"
-      puts "  3. Imperial (Fahrenheit)"
-      puts "\n"
-
-      input = gets.chomp()
-      puts "\n"
+    until TodaysWeather::Weather.valid_units?(input) || input == "exit" do
+      puts "\nSorry I didn't understand that."
+      TodaysWeather::Weather.display_units
+      input = gets.chomp.downcase
     end
 
-    case input
-    when "1"
-      puts "You've selected to show the weather in Standard units."
-      @units = "standard"
-      @degrees = "° Kelvin"
-    when "2"
-      puts "You've selected to show the weather in Metric units."
-      @units = "metric"
-      @degrees = "°C"
-    when "3"
-      puts "You've selected to show the weather in Imperial units."
-      @units = "imperial"
-      @degrees = "°F" 
-    when 'exit'
-      @zipcode = 'exit'
-    end
-  end
-
-  # takes @zipcode and @units and sends to #display_weather
-  def show_weather
-    until @zipcode == 'exit' do
-      self.get_zipcode
-      self.display_weather unless @zipcode == 'exit'
-    end
-  end
-
-  # prompts user to input a valid 5-digit zipcode or type exit
-  def get_zipcode
-    puts "\n"
-    puts "Please input a 5-digit zipcode or type 'exit'."
-    @zipcode = gets.chomp.downcase
-
-    # the .to_i and .to_s is meant to catch invalid inputs of 5 non-number characters.
-    until @zipcode.to_i.to_s.size == 5 || @zipcode == 'exit' do
-      puts "\n"
-      puts "Sorry, I don't know what you're asking."
-      puts "Please input a 5-digit zipcode or type 'exit'."
-      puts "\n"
-
-      @zipcode = gets.chomp.downcase
-    end
-  end
-
-  # calls upon OpenWeatherAPI to pull weather data for the provided zipcode and units. returns a hash.
-  def get_weather_hash
-    @weather_hash = TodaysWeather::OpenWeatherAPI.weather_data_getter(@zipcode, @units)
-  end
-
-  # gets weather hash from the API method and determines if zipcode exists or not. Then outputs desired weather info.
-  def display_weather
-    weather_hash = self.get_weather_hash
-
-    if weather_hash["cod"] == 200
-      weather = TodaysWeather::Weather.new_from_hash(weather_hash)
-      puts "\n"
-      puts "  The current temperature is #{weather.temp}#{@degrees} in #{weather.city}."
-      puts "  The temperature has a low of #{weather.temp_low}#{@degrees} and a high of #{weather.temp_high}#{@degrees}."
+    if input == "exit"
+      @exit = true
     else
-      puts "\n"
-      puts "Sorry. The zipcode you searched cannot be found."
+      @units = TodaysWeather::Weather.weather_units[input.to_i - 1]
+      puts "\nYou've selected to show the weather in #{@units[:display_name]}."
+    end
+  end
+
+  # loops until user provides a 5-digit input that could possibly be a zipcode.
+  def get_zipcode
+    puts "\nPlease input a 5-digit zipcode or type 'exit'."
+    input = gets.chomp.downcase
+
+    until TodaysWeather::Weather.possible_zipcode?(input) || input == "exit" do
+      puts "\nSorry, I didn't catch that."
+      puts "\nPlease input a 5-digit zipcode or type 'exit'."
+      input = gets.chomp.downcase
+    end
+
+    if input == "exit"
+      @exit = true
+    else
+      @zipcode = input
+    end
+  end
+
+  # creates weather class instance and states the basic weather information provided from api
+  def pull_weather(weather_hash)
+    @weather = TodaysWeather::Weather.new_from_api(weather_hash)
+    @weather.units = @units[:api_input]
+    @weather.zipcode = @zipcode
+    puts "\nIt is currently #{@weather.temp}#{@units[:degrees]} with #{@weather.main.downcase} in #{@weather.city}."
+  end
+
+  # gives user more weather info stored in weather instance from api
+  def more_details
+    puts "\nWould you like more details on the weather?"
+    puts "Type 'y' to get more details, 'n' to check a new zipcode, or 'exit'."
+    input = gets.chomp.downcase
+
+    # loops until until user provides valid input
+    until ["y","n"].include?(input) || input == 'exit' do
+      puts "\nSorry, I didn't understand that."
+      puts "\nWould you like more details on the weather?"
+      puts "Type 'y' to get more details, 'n' to check a new zipcode, or 'exit'."
+      input = gets.chomp.downcase
+    end
+
+    if input == "y"
+      puts "\nLocation: #{@weather.city}"
+      puts "Zipcode: #{@zipcode}"
+      puts "Status: #{@weather.main}" 
+      puts "Current Temperature: #{@weather.temp}#{@units[:degrees]}"
+      puts "High Temperature: #{@weather.temp_high}#{@units[:degrees]}"
+      puts "Low Temperature: #{@weather.temp_low}#{@units[:degrees]}"
+      puts "Humidity: #{@weather.humidity}%"
+    elsif input == "exit"
+      @exit = true
     end
   end
 
