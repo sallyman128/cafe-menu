@@ -22,7 +22,3 @@ Program Experience:
 
   Program continues on a loop until user exits.
 
-
-
-ToDo
-  Hide API key from being pushed to github!

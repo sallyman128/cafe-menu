@@ -20,7 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-To use this gem, you will need to generate a personal API key from Open Weather <https://openweathermap.org/price>
+To use this gem, you will need to generate a personal API key from Open Weather <https://openweathermap.org/price>.
+
+Set your personal API key to the api_key variable ln 7 of weather_api.rb. 
 
 The gem will prompt the user to select their preferred unit of measurement for temperature and a 5-digit zipcode in the U.S. Using both pieces of information, the gem will pull the desired data from the OpenWeather API and output it to the user.
 
